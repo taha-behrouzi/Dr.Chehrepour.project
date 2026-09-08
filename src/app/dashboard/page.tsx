@@ -11,7 +11,7 @@ export default async function DashboardPage() {
 
   return (
     <div className="space-y-8">
-      {/* Welcome Banner */}
+      {/* Welcome Card */}
       <div className="bg-gradient-to-r from-navy via-navy-light to-navy border border-gold/30 rounded-2xl p-8 text-cream shadow-xl relative overflow-hidden">
         <div className="absolute -top-24 -left-24 w-48 h-48 bg-gold/10 rounded-full blur-3xl pointer-events-none" />
         <div className="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
@@ -20,7 +20,7 @@ export default async function DashboardPage() {
               خوش آمدید، <span className="text-gold">{userIdentifier}</span>
             </h1>
             <p className="text-cream/70 text-sm">
-              به پنل کاربری خود خوش آمدید. از این بخش می‌توانید دوره‌ها، پیام‌ها و کیف پول خود را مدیریت کنید.
+              به پنل کاربری خود خوش آمدید. از این بخش می‌توانید وضعیت حساب و اطلاعات خود را مشاهده کنید.
             </p>
           </div>
           <div className="shrink-0">
@@ -31,9 +31,9 @@ export default async function DashboardPage() {
         </div>
       </div>
 
-      {/* Summary Cards Grid */}
+      {/* 3-Column Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Active Courses Card */}
+        {/* Card 1: Active Courses */}
         <div className="bg-white rounded-xl p-6 shadow-sm border border-slate-200/80 hover:border-gold/50 transition-all duration-300 group">
           <div className="flex items-center justify-between mb-4">
             <span className="text-sm font-medium text-slate-500">دوره‌های فعال</span>
@@ -44,25 +44,11 @@ export default async function DashboardPage() {
               </svg>
             </div>
           </div>
-          <div className="text-3xl font-bold text-navy mb-1">۲ دوره</div>
-          <p className="text-xs text-slate-400">در حال یادگیری</p>
+          <div className="text-3xl font-bold text-navy mb-1">0</div>
+          <p className="text-xs text-slate-400">دوره‌های ثبت‌نام شده</p>
         </div>
 
-        {/* New Messages Card */}
-        <div className="bg-white rounded-xl p-6 shadow-sm border border-slate-200/80 hover:border-gold/50 transition-all duration-300 group">
-          <div className="flex items-center justify-between mb-4">
-            <span className="text-sm font-medium text-slate-500">پیام‌های جدید</span>
-            <div className="w-10 h-10 rounded-xl bg-teal-500/10 text-teal flex items-center justify-center group-hover:scale-110 transition-transform">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-              </svg>
-            </div>
-          </div>
-          <div className="text-3xl font-bold text-navy mb-1">۰ پیام</div>
-          <p className="text-xs text-slate-400">صندوق ورودی خالی است</p>
-        </div>
-
-        {/* Wallet Card */}
+        {/* Card 2: Wallet */}
         <div className="bg-white rounded-xl p-6 shadow-sm border border-slate-200/80 hover:border-gold/50 transition-all duration-300 group">
           <div className="flex items-center justify-between mb-4">
             <span className="text-sm font-medium text-slate-500">کیف پول</span>
@@ -73,7 +59,21 @@ export default async function DashboardPage() {
             </div>
           </div>
           <div className="text-3xl font-bold text-navy mb-1">۰ تومان</div>
-          <p className="text-xs text-slate-400">اعتبار موجود</p>
+          <p className="text-xs text-slate-400">موجودی کیف پول</p>
+        </div>
+
+        {/* Card 3: Messages */}
+        <div className="bg-white rounded-xl p-6 shadow-sm border border-slate-200/80 hover:border-gold/50 transition-all duration-300 group">
+          <div className="flex items-center justify-between mb-4">
+            <span className="text-sm font-medium text-slate-500">پیام‌ها</span>
+            <div className="w-10 h-10 rounded-xl bg-teal-500/10 text-teal flex items-center justify-center group-hover:scale-110 transition-transform">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+              </svg>
+            </div>
+          </div>
+          <div className="text-3xl font-bold text-navy mb-1">۰</div>
+          <p className="text-xs text-slate-400">پیام‌های خوانده نشده</p>
         </div>
       </div>
     </div>

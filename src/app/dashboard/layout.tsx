@@ -27,7 +27,7 @@ export default async function DashboardLayout({
     },
     {
       name: 'دوره‌های من',
-      href: '#',
+      href: '/dashboard/courses',
       icon: (
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 14l9-5-9-5-9 5 9 5z" />
@@ -37,7 +37,7 @@ export default async function DashboardLayout({
     },
     {
       name: 'تیکت‌ها',
-      href: '#',
+      href: '/dashboard/tickets',
       icon: (
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
@@ -46,7 +46,7 @@ export default async function DashboardLayout({
     },
     {
       name: 'تنظیمات',
-      href: '#',
+      href: '/dashboard/settings',
       icon: (
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
@@ -58,8 +58,8 @@ export default async function DashboardLayout({
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col md:flex-row dir-rtl" dir="rtl">
-      {/* Sidebar for Desktop */}
-      <aside className="w-full md:w-64 bg-navy text-cream border-l border-gold/30 flex flex-col justify-between p-6 shadow-xl shrink-0">
+      {/* Desktop Right Sidebar */}
+      <aside className="w-64 bg-navy text-cream h-screen sticky top-0 p-6 border-l border-gold/20 flex flex-col justify-between shrink-0 shadow-xl">
         <div className="space-y-8">
           <div className="pb-6 border-b border-gold/20">
             <h2 className="text-xl font-bold text-cream flex items-center gap-2">
@@ -84,13 +84,13 @@ export default async function DashboardLayout({
           </nav>
         </div>
 
-        <div className="pt-6 border-t border-gold/20 mt-8 md:mt-0">
+        <div className="pt-6 border-t border-gold/20">
           <LogoutButton />
         </div>
       </aside>
 
       {/* Main Content Area */}
-      <main className="flex-1 bg-cream/50 p-6 md:p-10">
+      <main className="flex-1 bg-cream/30 p-8 min-h-screen">
         <div className="max-w-6xl mx-auto">
           {children}
         </div>
