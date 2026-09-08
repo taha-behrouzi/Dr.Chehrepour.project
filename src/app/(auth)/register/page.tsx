@@ -1,0 +1,121 @@
+"use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+
+export default function RegisterPage() {
+  const router = useRouter();
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+
+    try {
+      const res = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, phone, password }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.error || "خطایی در ثبت‌نام رخ داده است.");
+        setLoading(false);
+        return;
+      }
+
+      router.push("/login");
+    } catch (err) {
+      setError("خطایی رخ داده است. لطفا دوباره تلاش کنید.");
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-navy text-cream flex items-center justify-center p-4" dir="rtl">
+      <div className="w-full max-w-md bg-navy-light/40 backdrop-blur-md border border-gold/30 rounded-2xl p-8 shadow-2xl relative overflow-hidden">
+        <div className="absolute -top-24 -left-24 w-48 h-48 bg-gold/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-24 -right-24 w-48 h-48 bg-teal/10 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-bold tracking-tight text-cream mb-2">ایجاد حساب کاربری</h1>
+          <p className="text-cream/70 text-sm">لطفا اطلاعات خود را جهت ثبت‌نام وارد نمایید</p>
+        </div>
+
+        {error && (
+          <div className="mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-300 text-sm text-center">
+            {error}
+          </div>
+        )}
+
+        <form onSubmit={handleSubmit} className="space-y-5">
+          <div>
+            <label className="block text-sm font-medium text-cream/90 mb-2">
+              نام و نام خانوادگی
+            </label>
+            <input
+              type="text"
+              placeholder="مثال: علی محمدی"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="w-full px-4 py-3 bg-navy-dark/60 border border-gold/20 rounded-xl text-cream placeholder-cream/30 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition duration-200"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-cream/90 mb-2">
+              شماره موبایل
+            </label>
+            <input
+              type="text"
+              required
+              placeholder="09123456789"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              className="w-full px-4 py-3 bg-navy-dark/60 border border-gold/20 rounded-xl text-cream placeholder-cream/30 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition duration-200 dir-ltr text-right"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-cream/90 mb-2">
+              رمز عبور
+            </label>
+            <input
+              type="password"
+              required
+              placeholder="••••••••"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full px-4 py-3 bg-navy-dark/60 border border-gold/20 rounded-xl text-cream placeholder-cream/30 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition duration-200 dir-ltr text-right"
+            />
+          </div>
+
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full py-3.5 px-4 bg-gradient-to-r from-gold via-amber-500 to-gold text-navy font-semibold rounded-xl hover:opacity-95 focus:outline-none focus:ring-2 focus:ring-gold/50 transition duration-200 disabled:opacity-50 shadow-lg shadow-gold/20 mt-2"
+          >
+            {loading ? "در حال ثبت‌نام..." : "ثبت‌نام"}
+          </button>
+        </form>
+
+        <div className="mt-8 text-center text-sm text-cream/70">
+          قبلاً ثبت‌نام کرده‌اید؟{" "}
+          <Link href="/login" className="text-gold hover:underline font-medium">
+            وارد شوید
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}
