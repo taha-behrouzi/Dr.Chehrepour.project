@@ -1,5 +1,5 @@
 import { getServerSession } from 'next-auth';
-import { redirect } from 'next-navigation';
+import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import { authOptions } from '@/lib/auth';
 import LogoutButton from '@/components/LogoutButton';
