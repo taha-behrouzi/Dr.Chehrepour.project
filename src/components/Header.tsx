@@ -2,9 +2,11 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { useSession, signOut } from 'next-auth/react';
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { data: session, status } = useSession();
 
   const navLinks = [
     { name: 'صفحه اصلی', href: '/' },
@@ -69,21 +71,37 @@ export default function Header() {
               </span>
             </button>
 
-            {/* Login / Register Button */}
-            <Link
-              href="#"
-              className="inline-flex items-center gap-2 border border-gold text-gold hover:bg-gold hover:text-navy px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 shadow-sm hover:shadow-gold/20"
-            >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
-                />
-              </svg>
-              ورود / ثبت‌نام
-            </Link>
+            {/* Login / Register Button or User Info */}
+            {status === 'loading' ? (
+              <div className="w-28 h-10 bg-cream/10 animate-pulse rounded-xl" />
+            ) : session?.user ? (
+              <div className="flex items-center gap-3">
+                <span className="text-sm font-medium text-gold">
+                  {session.user.name || (session.user as { phone?: string }).phone || 'کاربر'}
+                </span>
+                <button
+                  onClick={() => signOut()}
+                  className="inline-flex items-center gap-2 border border-red-500/50 text-red-400 hover:bg-red-500 hover:text-white px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300"
+                >
+                  خروج
+                </button>
+              </div>
+            ) : (
+              <Link
+                href="/login"
+                className="inline-flex items-center gap-2 border border-gold text-gold hover:bg-gold hover:text-navy px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 shadow-sm hover:shadow-gold/20"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
+                  />
+                </svg>
+                ورود / ثبت‌نام
+              </Link>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -130,13 +148,30 @@ export default function Header() {
             </Link>
           ))}
           <div className="pt-4 border-t border-cream/10 flex flex-col gap-3">
-            <Link
-              href="#"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="w-full text-center border border-gold text-gold hover:bg-gold hover:text-navy py-2.5 rounded-xl text-sm font-semibold transition-all duration-200"
-            >
-              ورود / ثبت‌نام
-            </Link>
+            {session?.user ? (
+              <div className="flex flex-col gap-2">
+                <span className="text-sm font-medium text-gold text-center">
+                  {session.user.name || (session.user as { phone?: string }).phone || 'کاربر'}
+                </span>
+                <button
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    signOut();
+                  }}
+                  className="w-full text-center border border-red-500/50 text-red-400 hover:bg-red-500 hover:text-white py-2.5 rounded-xl text-sm font-semibold transition-all duration-200"
+                >
+                  خروج از حساب
+                </button>
+              </div>
+            ) : (
+              <Link
+                href="/login"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="w-full text-center border border-gold text-gold hover:bg-gold hover:text-navy py-2.5 rounded-xl text-sm font-semibold transition-all duration-200"
+              >
+                ورود / ثبت‌نام
+              </Link>
+            )}
           </div>
         </div>
       )}
