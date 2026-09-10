@@ -8,11 +8,36 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(uuid())
-  name      String?
-  phone     String   @unique
-  password  String
-  role      String   @default("USER")
+  id             String          @id @default(uuid())
+  name           String?
+  phone          String          @unique
+  password       String
+  role           String          @default("USER")
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  tickets        Ticket[]
+  ticketMessages TicketMessage[]
+}
+
+model Ticket {
+  id          String          @id @default(cuid())
+  title       String
+  description String
+  status      String          @default("OPEN")
+  priority    String          @default("MEDIUM")
+  userId      String
+  user        User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  messages    TicketMessage[]
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+}
+
+model TicketMessage {
+  id        String   @id @default(cuid())
+  text      String
+  ticketId  String
+  ticket    Ticket   @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 }
