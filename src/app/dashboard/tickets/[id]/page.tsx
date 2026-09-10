@@ -8,8 +8,9 @@ import TicketMessageForm from "./TicketMessageForm";
 export default async function TicketDetailPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
+  const { id } = await params;
   const session = await getServerSession(authOptions);
 
   if (!session || !session.user) {
@@ -19,7 +20,7 @@ export default async function TicketDetailPage({
   const user = session.user as { id?: string; role?: string };
 
   const ticket = await prisma.ticket.findUnique({
-    where: { id: params.id },
+    where: { id },
     include: {
       user: {
         select: { id: true, name: true, phone: true },
