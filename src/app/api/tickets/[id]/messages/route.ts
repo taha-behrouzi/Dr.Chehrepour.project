@@ -5,9 +5,15 @@ import { prisma } from "@/lib/prisma";
 
 export async function POST(
   req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
+
+    if (!id) {
+      return NextResponse.json({ error: "Invalid ticket ID" }, { status: 400 });
+    }
+
     const session = await getServerSession(authOptions);
 
     if (!session || !session.user) {
@@ -21,7 +27,7 @@ export async function POST(
     }
 
     const ticket = await prisma.ticket.findUnique({
-      where: { id: params.id },
+      where: { id },
     });
 
     if (!ticket) {
@@ -44,7 +50,7 @@ export async function POST(
     const message = await prisma.ticketMessage.create({
       data: {
         text,
-        ticketId: params.id,
+        ticketId: id,
         userId: user.id,
       },
       include: {
