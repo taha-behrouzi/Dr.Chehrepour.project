@@ -10,7 +10,7 @@ export default function Header() {
 
   const navLinks = [
     { name: 'صفحه اصلی', href: '/' },
-    { name: 'مقالات', href: '/articles' },
+    { name: 'مقالات و پادکست‌ها', href: '/articles' },
     { name: 'پادکست‌ها', href: '/podcasts' },
     { name: 'ویدیوها', href: '/videos' },
     { name: 'دوره‌های آموزشی', href: '#' },
@@ -29,7 +29,7 @@ export default function Header() {
                 آ
               </div>
               <span className="text-xl sm:text-2xl font-extrabold text-cream tracking-tight group-hover:text-gold transition-colors duration-200">
-                آکادمی <span className="text-gold">لوکس</span>
+                آکادمی لوکس
               </span>
             </Link>
           </div>
