@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import CustomVideoPlayer from "@/components/CustomVideoPlayer";
 
 export const revalidate = 0;
 
@@ -67,9 +68,11 @@ export default async function VideoDetailPage({
             </Link>
           </div>
         ) : (
-          <div className="bg-black rounded-2xl overflow-hidden border border-slate-200">
-            <video controls src={video.videoUrl} className="w-full rounded-lg" />
-          </div>
+          <CustomVideoPlayer
+            videoUrl={video.videoUrl}
+            isPremium={video.isPremium}
+            title={video.title}
+          />
         )}
       </div>
     </div>
