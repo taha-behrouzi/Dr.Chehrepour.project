@@ -10,9 +10,10 @@ export default function Header() {
 
   const navLinks = [
     { name: 'صفحه اصلی', href: '/' },
+    { name: 'مقالات', href: '/articles' },
+    { name: 'پادکست‌ها', href: '/podcasts' },
+    { name: 'ویدیوها', href: '/videos' },
     { name: 'دوره‌های آموزشی', href: '#' },
-    { name: 'مقالات و پادکست‌ها', href: '#' },
-    { name: 'کتاب‌ها', href: '#' },
     { name: 'رزرو نوبت مشاوره', href: '#' },
   ];
 
