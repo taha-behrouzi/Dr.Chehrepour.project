@@ -71,14 +71,25 @@ export default function Header() {
               </span>
             </button>
 
-            {/* Login / Register Button or User Info */}
+            {/* Login / Register Button or User Info & Dashboard Link */}
             {status === 'loading' ? (
               <div className="w-28 h-10 bg-cream/10 animate-pulse rounded-xl" />
             ) : session?.user ? (
               <div className="flex items-center gap-3">
-                <span className="text-sm font-medium text-gold">
-                  {session.user.name || (session.user as { phone?: string }).phone || 'کاربر'}
-                </span>
+                <Link
+                  href="/dashboard"
+                  className="inline-flex items-center gap-2 bg-gold hover:bg-gold-hover text-navy px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300 shadow-sm"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                    />
+                  </svg>
+                  داشبورد
+                </Link>
                 <button
                   onClick={() => signOut()}
                   className="inline-flex items-center gap-2 border border-red-500/50 text-red-400 hover:bg-red-500 hover:text-white px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300"
@@ -150,9 +161,13 @@ export default function Header() {
           <div className="pt-4 border-t border-cream/10 flex flex-col gap-3">
             {session?.user ? (
               <div className="flex flex-col gap-2">
-                <span className="text-sm font-medium text-gold text-center">
-                  {session.user.name || (session.user as { phone?: string }).phone || 'کاربر'}
-                </span>
+                <Link
+                  href="/dashboard"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="w-full text-center bg-gold text-navy hover:bg-gold-hover py-2.5 rounded-xl text-sm font-semibold transition-all duration-200"
+                >
+                  ورود به داشبورد
+                </Link>
                 <button
                   onClick={() => {
                     setIsMobileMenuOpen(false);
