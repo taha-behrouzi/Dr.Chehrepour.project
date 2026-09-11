@@ -1,10 +1,6 @@
-import Header from "@/components/Header";
-
 export default function Home() {
   return (
     <div className="min-h-screen flex flex-col justify-between">
-      <Header />
-
       {/* Hero Section */}
       <section className="bg-navy text-cream py-20 px-6 sm:px-12 text-center shadow-lg">
         <div className="max-w-4xl mx-auto flex flex-col items-center gap-6">
