@@ -3,13 +3,16 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useSession, signOut } from 'next-auth/react';
+import { useCart } from '@/context/CartContext';
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { data: session, status } = useSession();
+  const { totalItems } = useCart();
 
   const navLinks = [
     { name: 'صفحه اصلی', href: '/' },
+    { name: 'فروشگاه', href: '/products' },
     { name: 'مقالات و پادکست‌ها', href: '/articles' },
     { name: 'پادکست‌ها', href: '/podcasts' },
     { name: 'ویدیوها', href: '/videos' },
@@ -50,9 +53,10 @@ export default function Header() {
           {/* Left Side: Actions (Cart & Auth) */}
           <div className="hidden sm:flex items-center gap-4">
             {/* Cart Icon Button */}
-            <button
+            <Link
+              href="/cart"
               aria-label="سبد خرید"
-              className="p-2.5 text-cream hover:text-teal rounded-xl border border-cream/10 hover:border-teal/40 bg-navy/50 transition-all duration-200 relative group"
+              className="p-2.5 text-cream hover:text-teal rounded-xl border border-cream/10 hover:border-teal/40 bg-navy/50 transition-all duration-200 relative group flex items-center justify-center"
             >
               <svg
                 className="w-5 h-5 transition-transform duration-200 group-hover:scale-110"
@@ -67,10 +71,12 @@ export default function Header() {
                   d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
                 />
               </svg>
-              <span className="absolute -top-1 -right-1 w-4 h-4 bg-gold text-navy text-[10px] font-bold rounded-full flex items-center justify-center">
-                ۰
-              </span>
-            </button>
+              {totalItems > 0 && (
+                <span className="absolute -top-1 -right-1 w-5 h-5 bg-gold text-navy text-[11px] font-extrabold rounded-full flex items-center justify-center border border-navy shadow-sm">
+                  {totalItems.toLocaleString('fa-IR')}
+                </span>
+              )}
+            </Link>
 
             {/* Login / Register Button or User Info & Dashboard Link */}
             {status === 'loading' ? (
@@ -119,14 +125,20 @@ export default function Header() {
           {/* Mobile Menu Button */}
           <div className="flex lg:hidden items-center gap-3">
             {/* Mobile Cart Button */}
-            <button
+            <Link
+              href="/cart"
               aria-label="سبد خرید"
-              className="p-2 text-cream hover:text-teal sm:hidden"
+              className="p-2 text-cream hover:text-teal sm:hidden relative"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
               </svg>
-            </button>
+              {totalItems > 0 && (
+                <span className="absolute top-0 right-0 w-4 h-4 bg-gold text-navy text-[10px] font-extrabold rounded-full flex items-center justify-center">
+                  {totalItems.toLocaleString('fa-IR')}
+                </span>
+              )}
+            </Link>
 
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}

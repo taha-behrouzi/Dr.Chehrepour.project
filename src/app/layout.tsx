@@ -3,6 +3,7 @@ import { Vazirmatn } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Providers from "@/components/Providers";
+import { CartProvider } from "@/context/CartContext";
 import "./globals.css";
 
 const vazirmatn = Vazirmatn({
@@ -24,9 +25,11 @@ export default function RootLayout({
     <html lang="fa" dir="rtl">
       <body className={`${vazirmatn.className} min-h-screen flex flex-col antialiased`}>
         <Providers>
-          <Header />
-          <main className="flex-grow">{children}</main>
-          <Footer />
+          <CartProvider>
+            <Header />
+            <main className="flex-grow">{children}</main>
+            <Footer />
+          </CartProvider>
         </Providers>
       </body>
     </html>
