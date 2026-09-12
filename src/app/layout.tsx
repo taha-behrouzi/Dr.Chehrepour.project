@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Vazirmatn } from "next/font/google";
+import { Toaster } from "react-hot-toast";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Providers from "@/components/Providers";
@@ -23,12 +24,26 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fa" dir="rtl">
-      <body className={`${vazirmatn.className} min-h-screen flex flex-col antialiased`}>
+      <body className={`${vazirmatn.className} min-h-screen flex flex-col antialiased bg-navy text-cream`}>
         <Providers>
           <CartProvider>
             <Header />
             <main className="flex-grow">{children}</main>
             <Footer />
+            <Toaster
+              position="bottom-right"
+              toastOptions={{
+                duration: 3000,
+                style: {
+                  background: "#0A192F",
+                  color: "#F8F9FA",
+                  border: "1px solid rgba(212, 175, 55, 0.3)",
+                  borderRadius: "12px",
+                  fontFamily: "inherit",
+                  direction: "rtl",
+                },
+              }}
+            />
           </CartProvider>
         </Providers>
       </body>
