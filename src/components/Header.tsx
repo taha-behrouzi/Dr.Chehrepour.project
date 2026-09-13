@@ -30,11 +30,11 @@ export default function Header() {
           <div className="flex-shrink-0 flex items-center">
             <Link href="/" className="flex items-center shrink-0">
               <Image
-                src="/logo.png"
+                src="/logo2.png"
                 alt="دکتر حمید چهره پور"
                 width={240}
                 height={60}
-                className="w-48 md:w-56 h-auto object-contain transition-transform duration-300 hover:scale-105"
+                className="w-44 md:w-52 h-auto object-contain transition-transform duration-300 hover:scale-105"
                 priority
               />
             </Link>
