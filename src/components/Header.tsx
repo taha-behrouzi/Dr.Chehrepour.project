@@ -27,14 +27,14 @@ export default function Header() {
         <div className="flex items-center justify-between h-20">
           
           {/* Right Side: Logo */}
-          <div className="flex-shrink-0 flex items-center gap-3">
-            <Link href="/" className="flex items-center gap-3 py-1 shrink-0">
+          <div className="flex-shrink-0 flex items-center">
+            <Link href="/" className="flex items-center shrink-0">
               <Image
                 src="/logo.png"
                 alt="دکتر حمید چهره پور"
                 width={240}
-                height={80}
-                className="h-10 md:h-12 w-auto object-contain transition-transform duration-300 hover:scale-105"
+                height={60}
+                className="w-48 md:w-56 h-auto object-contain transition-transform duration-300 hover:scale-105"
                 priority
               />
             </Link>
