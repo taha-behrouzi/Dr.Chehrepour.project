@@ -28,13 +28,13 @@ export default function Header() {
           
           {/* Right Side: Logo */}
           <div className="flex-shrink-0 flex items-center gap-3">
-            <Link href="/" className="flex items-center gap-2 group">
+            <Link href="/" className="flex items-center gap-3 py-1 shrink-0">
               <Image
                 src="/logo.png"
-                alt="دکتر چهره پور"
-                width={150}
-                height={50}
-                className="object-contain"
+                alt="دکتر حمید چهره پور"
+                width={240}
+                height={80}
+                className="h-10 md:h-12 w-auto object-contain transition-transform duration-300 hover:scale-105"
                 priority
               />
             </Link>
