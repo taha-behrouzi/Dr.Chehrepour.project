@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useSession, signOut } from 'next-auth/react';
 import { useCart } from '@/context/CartContext';
 
@@ -13,7 +14,7 @@ export default function Header() {
   const navLinks = [
     { name: 'صفحه اصلی', href: '/' },
     { name: 'فروشگاه', href: '/products' },
-    { name: 'مقالات و پادکست‌ها', href: '/articles' },
+    { name: 'مقالات', href: '/articles' },
     { name: 'پادکست‌ها', href: '/podcasts' },
     { name: 'ویدیوها', href: '/videos' },
     { name: 'دوره‌های آموزشی', href: '#' },
@@ -28,12 +29,14 @@ export default function Header() {
           {/* Right Side: Logo */}
           <div className="flex-shrink-0 flex items-center gap-3">
             <Link href="/" className="flex items-center gap-2 group">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-gold to-teal flex items-center justify-center text-navy font-bold text-xl shadow-md group-hover:scale-105 transition-transform duration-300">
-                آ
-              </div>
-              <span className="text-xl sm:text-2xl font-extrabold text-cream tracking-tight group-hover:text-gold transition-colors duration-200">
-                آکادمی لوکس
-              </span>
+              <Image
+                src="/logo.png"
+                alt="دکتر چهره پور"
+                width={150}
+                height={50}
+                className="object-contain"
+                priority
+              />
             </Link>
           </div>
 

@@ -47,11 +47,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* Footer Placeholder */}
-      <footer className="text-center py-6 text-slate-500 text-sm border-t border-slate-200">
-        تمامی حقوق برای وب‌سایت آموزشی محفوظ است.
-      </footer>
     </div>
   );
 }

@@ -13,8 +13,8 @@ const vazirmatn = Vazirmatn({
 });
 
 export const metadata: Metadata = {
-  title: "وب‌سایت آموزشی | صفحه اصلی",
-  description: "پلتفرم جامع آموزشی و فروشگاه آنلاین با طراحی فاخر و مدرن",
+  title: "دکتر چهره پور | روانشناس و مشاور",
+  description: "پلتفرم تخصصی روانشناسی، مشاوره و توسعه فردی. همراه شما در مسیر آگاهی، رشد و آرامش روان.",
 };
 
 export default function RootLayout({
