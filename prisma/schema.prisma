@@ -7,6 +7,18 @@ datasource db {
   url      = "file:./dev.db"
 }
 
+enum ConsultationType {
+  IN_PERSON
+  ONLINE
+}
+
+enum AppointmentStatus {
+  AVAILABLE
+  PENDING
+  BOOKED
+  CANCELLED
+}
+
 model User {
   id             String          @id @default(uuid())
   name           String?
@@ -17,6 +29,7 @@ model User {
   updatedAt      DateTime        @updatedAt
   tickets        Ticket[]
   ticketMessages TicketMessage[]
+  appointments   AppointmentSlot[]
 }
 
 model Ticket {
@@ -97,4 +110,22 @@ model Product {
   isFeatured    Boolean  @default(false)
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
+}
+
+model AppointmentSlot {
+  id           String            @id @default(cuid())
+  date         DateTime
+  startTime    String
+  endTime      String
+  type         ConsultationType  @default(ONLINE)
+  status       AppointmentStatus @default(AVAILABLE)
+  price        Int
+  location     String?
+  patientName  String?
+  patientPhone String?
+  notes        String?
+  userId       String?
+  user         User?             @relation(fields: [userId], references: [id], onDelete: SetNull)
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
 }
