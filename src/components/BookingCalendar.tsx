@@ -89,6 +89,11 @@ export default function BookingCalendar() {
     return filteredByTypeSlots.filter((s) => s.date === dateStr).length;
   };
 
+  const handleBookSlot = () => {
+    if (!selectedSlot) return;
+    alert(`نوبت شما برای ساعت ${selectedSlot.startTime} در تاریخ ${selectedSlot.date} با موفقیت انتخاب شد.`);
+  };
+
   if (isLoading) {
     return (
       <div className="flex flex-col justify-center items-center py-20 text-[#D4AF37] space-y-4" dir="rtl">
@@ -137,4 +142,136 @@ export default function BookingCalendar() {
           <span className="w-2.5 h-2.5 rounded-full bg-[#D4AF37]"></span>
           نوع مشاوره را انتخاب کنید:
         </label>
-        <div className="grid grid-cols-3 gap-2 p-1.5 bg-
+        <div className="grid grid-cols-3 gap-2 p-1.5 bg-[#16223B] border border-[#D4AF37]/20 rounded-xl">
+          <button
+            onClick={() => setConsultationTypeFilter('ALL')}
+            className={`py-2.5 text-xs sm:text-sm font-bold rounded-lg transition-all duration-200 ${
+              consultationTypeFilter === 'ALL'
+                ? 'bg-[#D4AF37] text-[#0B132B] shadow-md'
+                : 'text-white/70 hover:text-white hover:bg-white/5'
+            }`}
+          >
+            همه نوبت‌ها
+          </button>
+          <button
+            onClick={() => setConsultationTypeFilter('ONLINE')}
+            className={`py-2.5 text-xs sm:text-sm font-bold rounded-lg transition-all duration-200 ${
+              consultationTypeFilter === 'ONLINE'
+                ? 'bg-[#D4AF37] text-[#0B132B] shadow-md'
+                : 'text-white/70 hover:text-white hover:bg-white/5'
+            }`}
+          >
+            مشاوره آنلاین
+          </button>
+          <button
+            onClick={() => setConsultationTypeFilter('IN_PERSON')}
+            className={`py-2.5 text-xs sm:text-sm font-bold rounded-lg transition-all duration-200 ${
+              consultationTypeFilter === 'IN_PERSON'
+                ? 'bg-[#D4AF37] text-[#0B132B] shadow-md'
+                : 'text-white/70 hover:text-white hover:bg-white/5'
+            }`}
+          >
+            مشاوره حضوری
+          </button>
+        </div>
+      </div>
+
+      {/* Date Selection */}
+      {availableDates.length === 0 ? (
+        <div className="bg-[#16223B] border border-[#D4AF37]/10 rounded-2xl p-8 text-center text-white/60">
+          نوبت فعالی در حال حاضر وجود ندارد.
+        </div>
+      ) : (
+        <div className="space-y-4">
+          <label className="text-white text-base font-bold flex items-center gap-2">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#D4AF37]"></span>
+            تاریخ مورد نظر خود را انتخاب کنید:
+          </label>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            {availableDates.map((dateStr) => {
+              const { dayName, dayNum, monthName } = formatPersianDateDetails(dateStr);
+              const isSelected = selectedDate === dateStr;
+              const count = getSlotCountForDate(dateStr);
+
+              return (
+                <button
+                  key={dateStr}
+                  onClick={() => setSelectedDate(dateStr)}
+                  className={`p-4 rounded-xl border text-center transition-all duration-200 flex flex-col items-center justify-center gap-1 ${
+                    isSelected
+                      ? 'bg-[#D4AF37]/10 border-[#D4AF37] text-[#D4AF37]'
+                      : 'bg-[#16223B] border-[#D4AF37]/10 text-white/80 hover:border-[#D4AF37]/40'
+                  }`}
+                >
+                  <span className="text-xs opacity-75">{dayName}</span>
+                  <span className="text-xl font-extrabold">{dayNum}</span>
+                  <span className="text-xs opacity-75">{monthName}</span>
+                  <span className="text-[10px] mt-1 px-2 py-0.5 rounded-full bg-white/5 text-white/60">
+                    {count} نوبت
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* Time Slots Selection */}
+      {selectedDate && activeSlots.length > 0 && (
+        <div className="space-y-4">
+          <label className="text-white text-base font-bold flex items-center gap-2">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#D4AF37]"></span>
+            ساعت مورد نظر خود را انتخاب کنید:
+          </label>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+            {activeSlots.map((slot) => {
+              const isSelected = selectedSlot?.id === slot.id;
+              return (
+                <button
+                  key={slot.id}
+                  onClick={() => setSelectedSlot(slot)}
+                  className={`p-3.5 rounded-xl border text-center transition-all duration-200 flex flex-col items-center justify-center gap-1 ${
+                    isSelected
+                      ? 'bg-[#D4AF37]/10 border-[#D4AF37] text-[#D4AF37]'
+                      : 'bg-[#16223B] border-[#D4AF37]/10 text-white/80 hover:border-[#D4AF37]/40'
+                  }`}
+                >
+                  <span className="text-sm font-bold">
+                    {slot.startTime} - {slot.endTime}
+                  </span>
+                  <span className="text-[10px] opacity-75">
+                    {slot.type === 'ONLINE' ? 'آنلاین' : 'حضوری'}
+                  </span>
+                  <span className="text-xs font-semibold mt-1 text-[#D4AF37]">
+                    {slot.price.toLocaleString('fa-IR')} تومان
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* Booking Action Button */}
+      {selectedSlot && (
+        <div className="bg-[#16223B] border border-[#D4AF37]/30 rounded-2xl p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xl">
+          <div className="text-right space-y-1">
+            <p className="text-white/70 text-xs">نوبت انتخاب شده:</p>
+            <p className="text-white font-bold text-sm sm:text-base">
+              {formatPersianDateDetails(selectedSlot.date).dayName}{' '}
+              {formatPersianDateDetails(selectedSlot.date).dayNum}{' '}
+              {formatPersianDateDetails(selectedSlot.date).monthName} - ساعت{' '}
+              {selectedSlot.startTime} ({selectedSlot.type === 'ONLINE' ? 'آنلاین' : 'حضوری'})
+            </p>
+          </div>
+          <button
+            onClick={handleBookSlot}
+            className="w-full sm:w-auto px-8 py-3.5 bg-[#D4AF37] hover:bg-[#bfa032] text-[#0B132B] font-extrabold rounded-xl transition-all duration-200 shadow-lg shadow-[#D4AF37]/10"
+          >
+            تایید و ثبت نوبت
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
