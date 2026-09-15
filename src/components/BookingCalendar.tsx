@@ -113,11 +113,11 @@ export default function BookingCalendar() {
   }
 
   return (
-    <div className="space-y-8 dir-rtl text-right font-sans pb-28" dir="rtl">
+    <div className="space-y-8 dir-rtl text-right pb-28" dir="rtl">
       {/* Visual Step Indicator Header */}
       <div className="bg-[#16223B] border border-[#D4AF37]/20 rounded-2xl p-4 sm:p-5 shadow-lg">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs sm:text-sm text-white/80">
-          <span className="font-extrabold text-[#D4AF37] text-sm sm:text-base">
+          <span className="text-lg font-bold text-[#D4AF37]">
             مراحل رزرو:
           </span>
           <div className="flex items-center gap-2 sm:gap-4 flex-wrap justify-center font-medium">
@@ -204,7 +204,7 @@ export default function BookingCalendar() {
                   }`}
                 >
                   <span className="text-xs opacity-75">{dayName}</span>
-                  <span className="text-xl font-extrabold">{dayNum}</span>
+                  <span className="text-3xl font-extrabold">{dayNum}</span>
                   <span className="text-xs opacity-75">{monthName}</span>
                   <span className="text-[10px] mt-1 px-2 py-0.5 rounded-full bg-white/5 text-white/60">
                     {count} نوبت
@@ -236,7 +236,7 @@ export default function BookingCalendar() {
                       : 'bg-[#16223B] border-[#D4AF37]/10 text-white/80 hover:border-[#D4AF37]/40'
                   }`}
                 >
-                  <span className="text-sm font-bold">
+                  <span className="text-sm font-bold" dir="ltr">
                     {slot.startTime} - {slot.endTime}
                   </span>
                   <span className="text-[10px] opacity-75">
@@ -261,7 +261,7 @@ export default function BookingCalendar() {
               {formatPersianDateDetails(selectedSlot.date).dayName}{' '}
               {formatPersianDateDetails(selectedSlot.date).dayNum}{' '}
               {formatPersianDateDetails(selectedSlot.date).monthName} - ساعت{' '}
-              {selectedSlot.startTime} ({selectedSlot.type === 'ONLINE' ? 'آنلاین' : 'حضوری'})
+              <span dir="ltr" className="font-bold">{selectedSlot.startTime}</span> ({selectedSlot.type === 'ONLINE' ? 'آنلاین' : 'حضوری'})
             </p>
           </div>
           <button
