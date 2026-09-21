@@ -1,10 +1,12 @@
+import CommentsSection from "@/components/CommentsSection";
+
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col justify-between">
+    <div className="min-h-screen flex flex-col justify-between bg-[#0B132B]">
       {/* Hero Section */}
       <section className="bg-navy text-cream py-20 px-6 sm:px-12 text-center shadow-lg">
         <div className="max-w-4xl mx-auto flex flex-col items-center gap-6">
-          <h1 className="text-3xl sm:text-5xl font-bold leading-tight">
+          <h1 className="text-3xl sm:text-5xl font-bold leading-tight text-white">
             پروژه با موفقیت راه‌اندازی شد
           </h1>
           <p className="text-teal text-lg sm:text-xl max-w-2xl font-medium">
@@ -17,14 +19,14 @@ export default function Home() {
       </section>
 
       {/* Color Swatch Preview Section */}
-      <section className="max-w-5xl mx-auto my-16 px-6 w-full">
-        <h2 className="text-2xl font-bold text-center mb-8 text-slate-800">
+      <section className="max-w-5xl mx-auto my-12 px-6 w-full">
+        <h2 className="text-2xl font-bold text-center mb-8 text-white">
           تست پالت رنگی اختصاصی
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {/* Navy */}
-          <div className="flex flex-col items-center p-6 bg-navy text-cream rounded-2xl shadow-md">
-            <span className="font-bold text-lg mb-1">Navy</span>
+          <div className="flex flex-col items-center p-6 bg-[#16223B] text-cream rounded-2xl shadow-md border border-slate-700/50">
+            <span className="font-bold text-lg mb-1 text-white">Navy</span>
             <span className="text-xs text-teal dir-ltr font-mono">#0B132B</span>
           </div>
 
@@ -35,7 +37,7 @@ export default function Home() {
           </div>
 
           {/* Cream */}
-          <div className="flex flex-col items-center p-6 bg-cream border border-slate-200 text-slate-800 rounded-2xl shadow-md">
+          <div className="flex flex-col items-center p-6 bg-cream text-slate-800 rounded-2xl shadow-md">
             <span className="font-bold text-lg mb-1">Cream</span>
             <span className="text-xs text-slate-500 dir-ltr font-mono">#FBF9F5</span>
           </div>
@@ -45,6 +47,16 @@ export default function Home() {
             <span className="font-bold text-lg mb-1">Gold</span>
             <span className="text-xs text-navy/80 dir-ltr font-mono">#D4AF37</span>
           </div>
+        </div>
+      </section>
+
+      {/* Comments and Reviews Section */}
+      <section className="max-w-4xl mx-auto my-12 px-6 w-full">
+        <div className="border-t border-slate-800 pt-10">
+          <h2 className="text-2xl font-bold text-white mb-6 text-right">
+            نظرات و تجربیات
+          </h2>
+          <CommentsSection targetId="home-page-reviews" />
         </div>
       </section>
     </div>
