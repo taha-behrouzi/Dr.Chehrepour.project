@@ -1,5 +1,3 @@
-import CommentsSection from "@/components/CommentsSection";
-
 export default function Home() {
   return (
     <div className="min-h-screen flex flex-col justify-between bg-[#0B132B]">
@@ -47,16 +45,6 @@ export default function Home() {
             <span className="font-bold text-lg mb-1">Gold</span>
             <span className="text-xs text-navy/80 dir-ltr font-mono">#D4AF37</span>
           </div>
-        </div>
-      </section>
-
-      {/* Comments and Reviews Section */}
-      <section className="max-w-4xl mx-auto my-12 px-6 w-full">
-        <div className="border-t border-slate-800 pt-10">
-          <h2 className="text-2xl font-bold text-white mb-6 text-right">
-            نظرات و تجربیات
-          </h2>
-          <CommentsSection targetId="home-page-reviews" />
         </div>
       </section>
     </div>
