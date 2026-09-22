@@ -120,7 +120,7 @@ export default function CommentsSection({ targetId }: CommentsSectionProps) {
   };
 
   return (
-    <div className="bg-[#0B132B] text-white p-6 rounded-2xl text-right dir-rtl space-y-8">
+    <div dir="rtl" className="bg-[#0B132B] text-white p-6 rounded-2xl text-right dir-rtl space-y-8">
       <h3 className="text-xl font-bold text-white border-b border-slate-700/50 pb-3">
         دیدگاه‌ها و نظرات کاربران
       </h3>
