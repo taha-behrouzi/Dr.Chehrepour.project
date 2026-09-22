@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { prisma } from '@/lib/prisma';
 import AddToCartButton from '@/components/AddToCartButton';
+import CommentsSection from '@/components/CommentsSection';
 
 export const dynamic = 'force-dynamic';
 
@@ -23,7 +24,7 @@ export default async function ProductDetailPage({
 
   return (
     <div className="bg-navy min-h-screen text-cream py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-6xl mx-auto space-y-6">
+      <div className="max-w-6xl mx-auto space-y-8">
         {/* Navigation Breadcrumb */}
         <Link
           href="/products"
@@ -106,6 +107,9 @@ export default async function ProductDetailPage({
             </div>
           </div>
         </div>
+
+        {/* Comments Section */}
+        <CommentsSection targetId={product.id} />
       </div>
     </div>
   );

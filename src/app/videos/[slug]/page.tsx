@@ -4,6 +4,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import CustomVideoPlayer from "@/components/CustomVideoPlayer";
+import CommentsSection from "@/components/CommentsSection";
 
 export const revalidate = 0;
 
@@ -26,7 +27,7 @@ export default async function VideoDetailPage({
   const isLocked = video.isPremium && !isAuthenticated;
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
       <div className="bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-10 shadow-sm">
         <div className="flex items-center gap-3 mb-4">
           <span
@@ -75,6 +76,9 @@ export default async function VideoDetailPage({
           />
         )}
       </div>
+
+      {/* Comments Section */}
+      <CommentsSection targetId={video.id} />
     </div>
   );
 }
