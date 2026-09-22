@@ -80,7 +80,7 @@ export default function CommentsSection({ targetId }: CommentsSectionProps) {
         throw new Error(data.error || "خطایی در ثبت دیدگاه رخ داد.");
       }
 
-      setFeedbackMessage("دیدگاه شما ثبت شد و پس از تایید نمایش داده میشود.");
+      setFeedbackMessage("دیدگاه شما ثبت شد و پس از تایید نمایش داده می‌شود.");
       setNewComment("");
       setRating(5);
 
@@ -104,7 +104,7 @@ export default function CommentsSection({ targetId }: CommentsSectionProps) {
       return (
         <svg
           key={idx}
-          className={`w-4 h-4 ${starValue <= count ? "text-[#D4AF37] fill-[#D4AF37]" : "text-slate-600 fill-transparent"}`}
+          className={`w-4 h-4 ${starValue <= count ? "text-[#D4AF37] fill-[#D4AF37]" : "text-[#374151] fill-transparent"}`}
           viewBox="0 0 24 24"
           stroke="currentColor"
           strokeWidth="1.5"
@@ -120,7 +120,7 @@ export default function CommentsSection({ targetId }: CommentsSectionProps) {
   };
 
   return (
-    <div className="bg-[#16223B] p-6 rounded-2xl border border-slate-700/50 text-right dir-rtl space-y-8">
+    <div className="bg-[#0B132B] text-white p-6 rounded-2xl text-right dir-rtl space-y-8">
       <h3 className="text-xl font-bold text-white border-b border-slate-700/50 pb-3">
         دیدگاه‌ها و نظرات کاربران
       </h3>
@@ -142,7 +142,7 @@ export default function CommentsSection({ targetId }: CommentsSectionProps) {
                 className="focus:outline-none transition-transform hover:scale-110"
               >
                 <svg
-                  className={`w-6 h-6 ${(hoverRating || rating) >= star ? "text-[#D4AF37] fill-[#D4AF37]" : "text-slate-600 fill-transparent"}`}
+                  className={`w-6 h-6 ${(hoverRating || rating) >= star ? "text-[#D4AF37] fill-[#D4AF37]" : "text-[#374151] fill-transparent"}`}
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                   strokeWidth="1.5"
@@ -169,7 +169,7 @@ export default function CommentsSection({ targetId }: CommentsSectionProps) {
             onChange={(e) => setNewComment(e.target.value)}
             placeholder="دیدگاه یا تجربه خود را بنویسید..."
             required
-            className="w-full p-3 bg-[#0B132B] text-white border border-slate-700 rounded-xl focus:outline-none focus:border-teal-500 placeholder-slate-500 text-sm"
+            className="w-full p-3 bg-[#16223B] text-white border border-slate-700 rounded-xl focus:outline-none focus:border-teal-500 placeholder-slate-400 text-sm"
           />
         </div>
 
@@ -200,7 +200,7 @@ export default function CommentsSection({ targetId }: CommentsSectionProps) {
           comments.map((comment) => (
             <div
               key={comment.id}
-              className="bg-[#0B132B] p-4 rounded-xl border border-slate-800 space-y-2"
+              className="bg-[#16223B] border border-slate-700/50 p-4 rounded-xl mt-4 space-y-2"
             >
               <div className="flex items-center justify-between">
                 <span className="font-semibold text-sm text-slate-200">
