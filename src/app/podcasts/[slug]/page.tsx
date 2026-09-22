@@ -66,10 +66,14 @@ export default async function PodcastDetailPage({
               ورود / ثبت‌نام
             </Link>
           </div>
-        ) : (
+        ) : podcast?.audioUrl && podcast.audioUrl.trim() !== "" ? (
           <div className="bg-slate-50 p-6 rounded-2xl border border-slate-200">
             <h2 className="text-sm font-semibold text-navy mb-3">پخش فایل صوتی</h2>
             <audio controls src={podcast.audioUrl} className="w-full" />
+          </div>
+        ) : (
+          <div className="bg-slate-50 p-6 rounded-2xl border border-slate-200 text-center text-slate-500 text-sm">
+            فایل صوتی برای این پادکست موجود نیست.
           </div>
         )}
       </div>
