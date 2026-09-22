@@ -18,7 +18,7 @@ export default function Header() {
     { name: 'پادکست‌ها', href: '/podcasts' },
     { name: 'ویدیوها', href: '/videos' },
     { name: 'دوره‌های آموزشی', href: '#' },
-    { name: 'رزرو نوبت مشاوره', href: '#' },
+    { name: 'رزرو نوبت مشاوره', href: '/booking' },
   ];
 
   return (
