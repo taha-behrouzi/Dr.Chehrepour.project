@@ -1,3 +1,5 @@
+import CommentsSection from "@/components/CommentsSection";
+
 export default function Home() {
   return (
     <div className="min-h-screen flex flex-col justify-between bg-[#0B132B]">
@@ -46,6 +48,11 @@ export default function Home() {
             <span className="text-xs text-navy/80 dir-ltr font-mono">#D4AF37</span>
           </div>
         </div>
+      </section>
+
+      {/* Comments Section */}
+      <section className="max-w-5xl mx-auto mb-12 px-6 w-full">
+        <CommentsSection targetId="home-page" />
       </section>
     </div>
   );
