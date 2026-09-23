@@ -1,11 +1,17 @@
 'use client';
 
+import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useCart } from '@/context/CartContext';
+import DiscountForm from '@/components/DiscountForm';
 
 export default function CartPage() {
   const { cart, removeFromCart, updateQuantity, clearCart, totalPrice } = useCart();
+  const [discountPercent, setDiscountPercent] = useState<number>(0);
+
+  const discountAmount = totalPrice * (discountPercent / 100);
+  const finalPrice = totalPrice - discountAmount;
 
   if (cart.length === 0) {
     return (
@@ -96,88 +102,4 @@ export default function CartPage() {
                   </div>
 
                   {/* Controls */}
-                  <div className="flex items-center justify-between sm:justify-end gap-6 w-full sm:w-auto pt-4 sm:pt-0 border-t sm:border-t-0 border-gold/10">
-                    <div className="flex items-center border border-gold/30 rounded-xl overflow-hidden bg-navy/90 shadow-sm">
-                      <button
-                        onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                        className="px-3.5 py-1.5 hover:bg-gold/20 text-gold font-bold text-base transition-colors"
-                        aria-label="کاهش تعداد"
-                      >
-                        -
-                      </button>
-                      <span className="px-4 py-1.5 text-sm font-extrabold text-cream min-w-[2.5rem] text-center">
-                        {item.quantity.toLocaleString('fa-IR')}
-                      </span>
-                      <button
-                        onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                        className="px-3.5 py-1.5 hover:bg-gold/20 text-gold font-bold text-base transition-colors"
-                        aria-label="افزایش تعداد"
-                      >
-                        +
-                      </button>
-                    </div>
-
-                    <button
-                      onClick={() => removeFromCart(item.id)}
-                      className="p-2 text-cream/50 hover:text-red-400 hover:bg-red-500/10 rounded-xl transition-all"
-                      title="حذف آیتم"
-                    >
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Left Column: Order Summary */}
-          <div className="bg-navy/90 border border-gold/30 rounded-2xl p-6 space-y-6 shadow-xl sticky top-28">
-            <h2 className="text-xl font-extrabold text-gold border-b border-gold/15 pb-4 flex items-center justify-between">
-              <span>خلاصه سفارش</span>
-              <svg className="w-5 h-5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-              </svg>
-            </h2>
-
-            <div className="space-y-4 text-sm">
-              <div className="flex justify-between text-cream/80">
-                <span>جمع کل اقلام:</span>
-                <span className="font-bold text-cream">{totalPrice.toLocaleString('fa-IR')} تومان</span>
-              </div>
-              <div className="flex justify-between text-cream/80">
-                <span>مالیات و عوارض:</span>
-                <span className="text-teal font-semibold">محاسبه در پرداخت</span>
-              </div>
-              <div className="flex justify-between text-cream/80">
-                <span>هزینه ارسال:</span>
-                <span className="text-teal font-semibold">رایگان</span>
-              </div>
-            </div>
-
-            <div className="pt-4 border-t border-gold/15 flex justify-between items-center text-base font-extrabold">
-              <span className="text-cream">مبلغ قابل پرداخت:</span>
-              <span className="text-gold text-xl">{totalPrice.toLocaleString('fa-IR')} تومان</span>
-            </div>
-
-            <button
-              onClick={() => alert('امکان پرداخت به‌زودی فعال می‌شود.')}
-              className="w-full py-4 bg-gold hover:bg-gold-hover text-navy font-extrabold text-base rounded-xl transition-all duration-300 shadow-lg hover:shadow-gold/30 hover:scale-[1.02] active:scale-95 text-center flex items-center justify-center gap-2"
-            >
-              <span>تکمیل فرآیند خرید</span>
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
+                  <div className="flex items-center justify-between sm:
