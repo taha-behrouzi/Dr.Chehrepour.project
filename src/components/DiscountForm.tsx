@@ -3,10 +3,11 @@
 import React, { useState } from "react";
 
 interface DiscountFormProps {
+  onSuccess?: (percent: number) => void;
   onApplySuccess?: (percent: number) => void;
 }
 
-export default function DiscountForm({ onApplySuccess }: DiscountFormProps) {
+export default function DiscountForm({ onSuccess, onApplySuccess }: DiscountFormProps) {
   const [code, setCode] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
@@ -35,6 +36,9 @@ export default function DiscountForm({ onApplySuccess }: DiscountFormProps) {
       } else {
         setIsError(false);
         setMessage(`کد تخفیف با موفقیت اعمال شد (${data.percent}٪ تخفیف)`);
+        if (onSuccess) {
+          onSuccess(data.percent);
+        }
         if (onApplySuccess) {
           onApplySuccess(data.percent);
         }
